@@ -26,9 +26,8 @@ namespace CoinTracker.Models
         }
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<tblCoin> tblCoins { get; set; }
         public virtual DbSet<tblCoinComposition> tblCoinCompositions { get; set; }
-        public virtual DbSet<tblCoinImage> tblCoinImages { get; set; }
         public virtual DbSet<tblCoinType> tblCoinTypes { get; set; }
+        public virtual DbSet<tblCoin> tblCoins { get; set; }
     }
 }

@@ -32,10 +32,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Image_ID, "Image_ID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Image_Path, "Image_ID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input type="file" name="image" />
-                @Html.ValidationMessageFor(model => model.Image_ID, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Image_Path, "", new { @class = "text-danger" })
             </div>
         </div>
 

@@ -17,7 +17,7 @@ namespace CoinTracker.Controllers
         // GET: Coins
         public ActionResult Index()
         {
-            var tblCoins = db.tblCoins.Include(t => t.tblCoinComposition).Include(t => t.tblCoinImage).Include(t => t.tblCoinType);
+            var tblCoins = db.tblCoins.Include(t => t.tblCoinComposition).Include(t => t.tblCoinType);
             return View(tblCoins.ToList());
         }
 
@@ -40,7 +40,6 @@ namespace CoinTracker.Controllers
         public ActionResult Create()
         {
             ViewBag.Composition_ID = new SelectList(db.tblCoinCompositions, "Composition_ID", "Composition_Description");
-            ViewBag.Image_ID = new SelectList(db.tblCoinImages, "Image_ID", "Image_Path");
             ViewBag.Type_ID = new SelectList(db.tblCoinTypes, "Type_ID", "Type_Description");
             return View();
         }
@@ -50,8 +49,11 @@ namespace CoinTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Coin_ID,Type_ID,Image_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value")] tblCoin tblCoin, HttpPostedFileBase image, DateTime date)
+        public ActionResult Create([Bind(Include = "Coin_ID,Type_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value")] tblCoin tblCoin, HttpPostedFileBase image, DateTime date)
         {
+            //nned to add coin image path save
+            // need to add coin rename
+
             if (ModelState.IsValid)
             {
                 db.tblCoins.Add(tblCoin);
@@ -60,7 +62,6 @@ namespace CoinTracker.Controllers
             }
 
             ViewBag.Composition_ID = new SelectList(db.tblCoinCompositions, "Composition_ID", "Composition_Description", tblCoin.Composition_ID);
-            ViewBag.Image_ID = new SelectList(db.tblCoinImages, "Image_ID", "Image_Path", tblCoin.Image_ID);
             ViewBag.Type_ID = new SelectList(db.tblCoinTypes, "Type_ID", "Type_Description", tblCoin.Type_ID);
             return View(tblCoin);
         }
@@ -78,7 +79,6 @@ namespace CoinTracker.Controllers
                 return HttpNotFound();
             }
             ViewBag.Composition_ID = new SelectList(db.tblCoinCompositions, "Composition_ID", "Composition_Description", tblCoin.Composition_ID);
-            ViewBag.Image_ID = new SelectList(db.tblCoinImages, "Image_ID", "Image_Path", tblCoin.Image_ID);
             ViewBag.Type_ID = new SelectList(db.tblCoinTypes, "Type_ID", "Type_Description", tblCoin.Type_ID);
             return View(tblCoin);
         }
@@ -97,7 +97,6 @@ namespace CoinTracker.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Composition_ID = new SelectList(db.tblCoinCompositions, "Composition_ID", "Composition_Description", tblCoin.Composition_ID);
-            ViewBag.Image_ID = new SelectList(db.tblCoinImages, "Image_ID", "Image_Path", tblCoin.Image_ID);
             ViewBag.Type_ID = new SelectList(db.tblCoinTypes, "Type_ID", "Type_Description", tblCoin.Type_ID);
             return View(tblCoin);
         }

@@ -16,16 +16,15 @@ namespace CoinTracker.Models
     {
         public int Coin_ID { get; set; }
         public int Type_ID { get; set; }
-        public int Image_ID { get; set; }
         public int Composition_ID { get; set; }
         public string Coin_Name { get; set; }
         public string Coin_Description { get; set; }
         public System.DateTime Purchase_Date { get; set; }
         public double Purchase_Amount { get; set; }
         public Nullable<double> Face_Value { get; set; }
+        public string Image_Path { get; set; }
     
         public virtual tblCoinComposition tblCoinComposition { get; set; }
-        public virtual tblCoinImage tblCoinImage { get; set; }
         public virtual tblCoinType tblCoinType { get; set; }
     }
 }

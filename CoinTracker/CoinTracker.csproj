@@ -157,9 +157,6 @@
     <Compile Include="Models\tblCoinComposition.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tblCoinImage.cs">
-      <DependentUpon>DBModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\tblCoinType.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
