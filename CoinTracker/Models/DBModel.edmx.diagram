@@ -6,13 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b7b5be690a7a4aedbc455556bd1ea2bd" Name="Diagram1">
         <EntityTypeShape EntityType="SilverTrackerModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SilverTrackerModel.tblCoin" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SilverTrackerModel.tblCoinComposition" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SilverTrackerModel.tblCoinImage" Width="1.5" PointX="5.5" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SilverTrackerModel.tblCoinType" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinComposition" ManuallyRouted="false" />
-        <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinImage" ManuallyRouted="false" />
-        <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SilverTrackerModel.tblCoin" Width="1.5" PointX="3" PointY="3.875" />
+        <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinComposition" />
+        <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinType" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

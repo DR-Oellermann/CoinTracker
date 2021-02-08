@@ -50,7 +50,7 @@ namespace CoinTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Coin_ID,Type_ID,Image_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value")] tblCoin tblCoin)
+        public ActionResult Create([Bind(Include = "Coin_ID,Type_ID,Image_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value")] tblCoin tblCoin, HttpPostedFileBase image, DateTime date)
         {
             if (ModelState.IsValid)
             {

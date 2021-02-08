@@ -21,13 +21,13 @@
           </Key>
           <Property Name="Coin_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Type_ID" Type="int" Nullable="false" />
-          <Property Name="Image_ID" Type="int" Nullable="false" />
           <Property Name="Composition_ID" Type="int" Nullable="false" />
           <Property Name="Coin_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Coin_Description" Type="nvarchar(max)" />
           <Property Name="Purchase_Date" Type="date" Nullable="false" />
           <Property Name="Purchase_Amount" Type="float" Nullable="false" />
           <Property Name="Face_Value" Type="float" />
+          <Property Name="Image_Path" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCoinComposition">
           <Key>
@@ -35,13 +35,6 @@
           </Key>
           <Property Name="Composition_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Composition_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tblCoinImage">
-          <Key>
-            <PropertyRef Name="Image_ID" />
-          </Key>
-          <Property Name="Image_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Image_Path" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCoinType">
           <Key>
@@ -62,18 +55,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblCoin_tblCoinImage">
-          <End Role="tblCoinImage" Type="Self.tblCoinImage" Multiplicity="1" />
-          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCoinImage">
-              <PropertyRef Name="Image_ID" />
-            </Principal>
-            <Dependent Role="tblCoin">
-              <PropertyRef Name="Image_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblCoin_tblCoinType">
           <End Role="tblCoinType" Type="Self.tblCoinType" Multiplicity="1" />
           <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
@@ -90,14 +71,9 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCoin" EntityType="Self.tblCoin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCoinComposition" EntityType="Self.tblCoinComposition" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblCoinImage" EntityType="Self.tblCoinImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCoinType" EntityType="Self.tblCoinType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tblCoin_tblCoinComposition" Association="Self.FK_tblCoin_tblCoinComposition">
             <End Role="tblCoinComposition" EntitySet="tblCoinComposition" />
-            <End Role="tblCoin" EntitySet="tblCoin" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblCoin_tblCoinImage" Association="Self.FK_tblCoin_tblCoinImage">
-            <End Role="tblCoinImage" EntitySet="tblCoinImage" />
             <End Role="tblCoin" EntitySet="tblCoin" />
           </AssociationSet>
           <AssociationSet Name="FK_tblCoin_tblCoinType" Association="Self.FK_tblCoin_tblCoinType">
@@ -119,38 +95,13 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="tblCoin">
-          <Key>
-            <PropertyRef Name="Coin_ID" />
-          </Key>
-          <Property Name="Coin_ID" Type="Int32" Nullable="false" />
-          <Property Name="Type_ID" Type="Int32" Nullable="false" />
-          <Property Name="Image_ID" Type="Int32" Nullable="false" />
-          <Property Name="Composition_ID" Type="Int32" Nullable="false" />
-          <Property Name="Coin_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Coin_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Purchase_Amount" Type="Double" Nullable="false" />
-          <Property Name="Face_Value" Type="Double" />
-          <NavigationProperty Name="tblCoinComposition" Relationship="Self.FK_tblCoin_tblCoinComposition" FromRole="tblCoin" ToRole="tblCoinComposition" />
-          <NavigationProperty Name="tblCoinImage" Relationship="Self.FK_tblCoin_tblCoinImage" FromRole="tblCoin" ToRole="tblCoinImage" />
-          <NavigationProperty Name="tblCoinType" Relationship="Self.FK_tblCoin_tblCoinType" FromRole="tblCoin" ToRole="tblCoinType" />
-        </EntityType>
         <EntityType Name="tblCoinComposition">
           <Key>
             <PropertyRef Name="Composition_ID" />
           </Key>
           <Property Name="Composition_ID" Type="Int32" Nullable="false" />
           <Property Name="Composition_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblCoins" Relationship="Self.FK_tblCoin_tblCoinComposition" FromRole="tblCoinComposition" ToRole="tblCoin" />
-        </EntityType>
-        <EntityType Name="tblCoinImage">
-          <Key>
-            <PropertyRef Name="Image_ID" />
-          </Key>
-          <Property Name="Image_ID" Type="Int32" Nullable="false" />
-          <Property Name="Image_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblCoins" Relationship="Self.FK_tblCoin_tblCoinImage" FromRole="tblCoinImage" ToRole="tblCoin" />
+          <NavigationProperty Name="tblCoins" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinComposition" FromRole="tblCoinComposition" ToRole="tblCoin" />
         </EntityType>
         <EntityType Name="tblCoinType">
           <Key>
@@ -158,11 +109,41 @@
           </Key>
           <Property Name="Type_ID" Type="Int32" Nullable="false" />
           <Property Name="Type_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblCoins" Relationship="Self.FK_tblCoin_tblCoinType" FromRole="tblCoinType" ToRole="tblCoin" />
+          <NavigationProperty Name="tblCoins" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinType" FromRole="tblCoinType" ToRole="tblCoin" />
+        </EntityType>
+        <EntityContainer Name="SilverTrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblCoinCompositions" EntityType="Self.tblCoinComposition" />
+          <EntitySet Name="tblCoinTypes" EntityType="Self.tblCoinType" />
+          <EntitySet Name="tblCoins" EntityType="SilverTrackerModel.tblCoin" />
+          <AssociationSet Name="FK_tblCoin_tblCoinComposition" Association="SilverTrackerModel.FK_tblCoin_tblCoinComposition">
+            <End Role="tblCoinComposition" EntitySet="tblCoinCompositions" />
+            <End Role="tblCoin" EntitySet="tblCoins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCoin_tblCoinType" Association="SilverTrackerModel.FK_tblCoin_tblCoinType">
+            <End Role="tblCoinType" EntitySet="tblCoinTypes" />
+            <End Role="tblCoin" EntitySet="tblCoins" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblCoin">
+          <Key>
+            <PropertyRef Name="Coin_ID" />
+          </Key>
+          <Property Name="Coin_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Composition_ID" Type="Int32" Nullable="false" />
+          <Property Name="Coin_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Coin_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Purchase_Amount" Type="Double" Nullable="false" />
+          <Property Name="Face_Value" Type="Double" />
+          <Property Name="Image_Path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblCoinComposition" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinComposition" FromRole="tblCoin" ToRole="tblCoinComposition" />
+          <NavigationProperty Name="tblCoinType" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinType" FromRole="tblCoin" ToRole="tblCoinType" />
         </EntityType>
         <Association Name="FK_tblCoin_tblCoinComposition">
-          <End Role="tblCoinComposition" Type="Self.tblCoinComposition" Multiplicity="1" />
-          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <End Type="SilverTrackerModel.tblCoinComposition" Role="tblCoinComposition" Multiplicity="1" />
+          <End Type="SilverTrackerModel.tblCoin" Role="tblCoin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblCoinComposition">
               <PropertyRef Name="Composition_ID" />
@@ -172,21 +153,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblCoin_tblCoinImage">
-          <End Role="tblCoinImage" Type="Self.tblCoinImage" Multiplicity="1" />
-          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tblCoinImage">
-              <PropertyRef Name="Image_ID" />
-            </Principal>
-            <Dependent Role="tblCoin">
-              <PropertyRef Name="Image_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_tblCoin_tblCoinType">
-          <End Role="tblCoinType" Type="Self.tblCoinType" Multiplicity="1" />
-          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <End Type="SilverTrackerModel.tblCoinType" Role="tblCoinType" Multiplicity="1" />
+          <End Type="SilverTrackerModel.tblCoin" Role="tblCoin" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tblCoinType">
               <PropertyRef Name="Type_ID" />
@@ -196,25 +165,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="SilverTrackerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="tblCoins" EntityType="Self.tblCoin" />
-          <EntitySet Name="tblCoinCompositions" EntityType="Self.tblCoinComposition" />
-          <EntitySet Name="tblCoinImages" EntityType="Self.tblCoinImage" />
-          <EntitySet Name="tblCoinTypes" EntityType="Self.tblCoinType" />
-          <AssociationSet Name="FK_tblCoin_tblCoinComposition" Association="Self.FK_tblCoin_tblCoinComposition">
-            <End Role="tblCoinComposition" EntitySet="tblCoinCompositions" />
-            <End Role="tblCoin" EntitySet="tblCoins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblCoin_tblCoinImage" Association="Self.FK_tblCoin_tblCoinImage">
-            <End Role="tblCoinImage" EntitySet="tblCoinImages" />
-            <End Role="tblCoin" EntitySet="tblCoins" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblCoin_tblCoinType" Association="Self.FK_tblCoin_tblCoinType">
-            <End Role="tblCoinType" EntitySet="tblCoinTypes" />
-            <End Role="tblCoin" EntitySet="tblCoins" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -232,21 +182,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblCoins">
-            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoin">
-              <MappingFragment StoreEntitySet="tblCoin">
-                <ScalarProperty Name="Coin_ID" ColumnName="Coin_ID" />
-                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
-                <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
-                <ScalarProperty Name="Composition_ID" ColumnName="Composition_ID" />
-                <ScalarProperty Name="Coin_Name" ColumnName="Coin_Name" />
-                <ScalarProperty Name="Coin_Description" ColumnName="Coin_Description" />
-                <ScalarProperty Name="Purchase_Date" ColumnName="Purchase_Date" />
-                <ScalarProperty Name="Purchase_Amount" ColumnName="Purchase_Amount" />
-                <ScalarProperty Name="Face_Value" ColumnName="Face_Value" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblCoinCompositions">
             <EntityTypeMapping TypeName="SilverTrackerModel.tblCoinComposition">
               <MappingFragment StoreEntitySet="tblCoinComposition">
@@ -255,19 +190,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblCoinImages">
-            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoinImage">
-              <MappingFragment StoreEntitySet="tblCoinImage">
-                <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
-                <ScalarProperty Name="Image_Path" ColumnName="Image_Path" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tblCoinTypes">
             <EntityTypeMapping TypeName="SilverTrackerModel.tblCoinType">
               <MappingFragment StoreEntitySet="tblCoinType">
                 <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
                 <ScalarProperty Name="Type_Description" ColumnName="Type_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCoins">
+            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoin">
+              <MappingFragment StoreEntitySet="tblCoin">
+                <ScalarProperty Name="Image_Path" ColumnName="Image_Path" />
+                <ScalarProperty Name="Face_Value" ColumnName="Face_Value" />
+                <ScalarProperty Name="Purchase_Amount" ColumnName="Purchase_Amount" />
+                <ScalarProperty Name="Purchase_Date" ColumnName="Purchase_Date" />
+                <ScalarProperty Name="Coin_Description" ColumnName="Coin_Description" />
+                <ScalarProperty Name="Coin_Name" ColumnName="Coin_Name" />
+                <ScalarProperty Name="Composition_ID" ColumnName="Composition_ID" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+                <ScalarProperty Name="Coin_ID" ColumnName="Coin_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
