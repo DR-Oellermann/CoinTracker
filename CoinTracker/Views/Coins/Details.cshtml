@@ -1,0 +1,82 @@
+﻿@model CoinTracker.Models.tblCoin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tblCoin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Coin_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coin_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Coin_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Coin_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purchase_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Purchase_Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Purchase_Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Face_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Face_Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCoinComposition.Composition_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCoinComposition.Composition_Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCoinImage.Image_Path)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCoinImage.Image_Path)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tblCoinType.Type_Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tblCoinType.Type_Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Coin_ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

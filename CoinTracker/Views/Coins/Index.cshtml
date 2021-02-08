@@ -1,0 +1,75 @@
+﻿@model IEnumerable<CoinTracker.Models.tblCoin>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Coin_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coin_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purchase_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purchase_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Face_Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblCoinComposition.Composition_Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblCoinImage.Image_Path)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tblCoinType.Type_Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coin_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Coin_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purchase_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purchase_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Face_Value)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCoinComposition.Composition_Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCoinImage.Image_Path)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tblCoinType.Type_Description)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Coin_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Coin_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Coin_ID })
+        </td>
+    </tr>
+}
+
+</table>
