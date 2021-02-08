@@ -1,0 +1,298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SilverTrackerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tblCoin">
+          <Key>
+            <PropertyRef Name="Coin_ID" />
+          </Key>
+          <Property Name="Coin_ID" Type="int" Nullable="false" />
+          <Property Name="Type_ID" Type="int" Nullable="false" />
+          <Property Name="Image_ID" Type="int" Nullable="false" />
+          <Property Name="Composition_ID" Type="int" Nullable="false" />
+          <Property Name="Coin_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Coin_Description" Type="nvarchar(max)" />
+          <Property Name="Purchase_Date" Type="date" Nullable="false" />
+          <Property Name="Purchase_Amount" Type="float" Nullable="false" />
+          <Property Name="Face_Value" Type="float" />
+        </EntityType>
+        <EntityType Name="tblCoinComposition">
+          <Key>
+            <PropertyRef Name="Composition_ID" />
+          </Key>
+          <Property Name="Composition_ID" Type="int" Nullable="false" />
+          <Property Name="Composition_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCoinImage">
+          <Key>
+            <PropertyRef Name="Image_ID" />
+          </Key>
+          <Property Name="Image_ID" Type="int" Nullable="false" />
+          <Property Name="Image_Path" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblCoinType">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="int" Nullable="false" />
+          <Property Name="Type_Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tblCoin_tblCoinComposition">
+          <End Role="tblCoinComposition" Type="Self.tblCoinComposition" Multiplicity="1" />
+          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCoinComposition">
+              <PropertyRef Name="Composition_ID" />
+            </Principal>
+            <Dependent Role="tblCoin">
+              <PropertyRef Name="Composition_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCoin_tblCoinImage">
+          <End Role="tblCoinImage" Type="Self.tblCoinImage" Multiplicity="1" />
+          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCoinImage">
+              <PropertyRef Name="Image_ID" />
+            </Principal>
+            <Dependent Role="tblCoin">
+              <PropertyRef Name="Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCoin_tblCoinType">
+          <End Role="tblCoinType" Type="Self.tblCoinType" Multiplicity="1" />
+          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCoinType">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="tblCoin">
+              <PropertyRef Name="Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SilverTrackerModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCoin" EntityType="Self.tblCoin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCoinComposition" EntityType="Self.tblCoinComposition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCoinImage" EntityType="Self.tblCoinImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblCoinType" EntityType="Self.tblCoinType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblCoin_tblCoinComposition" Association="Self.FK_tblCoin_tblCoinComposition">
+            <End Role="tblCoinComposition" EntitySet="tblCoinComposition" />
+            <End Role="tblCoin" EntitySet="tblCoin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCoin_tblCoinImage" Association="Self.FK_tblCoin_tblCoinImage">
+            <End Role="tblCoinImage" EntitySet="tblCoinImage" />
+            <End Role="tblCoin" EntitySet="tblCoin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCoin_tblCoinType" Association="Self.FK_tblCoin_tblCoinType">
+            <End Role="tblCoinType" EntitySet="tblCoinType" />
+            <End Role="tblCoin" EntitySet="tblCoin" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SilverTrackerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tblCoin">
+          <Key>
+            <PropertyRef Name="Coin_ID" />
+          </Key>
+          <Property Name="Coin_ID" Type="Int32" Nullable="false" />
+          <Property Name="Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Image_ID" Type="Int32" Nullable="false" />
+          <Property Name="Composition_ID" Type="Int32" Nullable="false" />
+          <Property Name="Coin_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Coin_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Purchase_Amount" Type="Double" Nullable="false" />
+          <Property Name="Face_Value" Type="Double" />
+          <NavigationProperty Name="tblCoinComposition" Relationship="Self.FK_tblCoin_tblCoinComposition" FromRole="tblCoin" ToRole="tblCoinComposition" />
+          <NavigationProperty Name="tblCoinImage" Relationship="Self.FK_tblCoin_tblCoinImage" FromRole="tblCoin" ToRole="tblCoinImage" />
+          <NavigationProperty Name="tblCoinType" Relationship="Self.FK_tblCoin_tblCoinType" FromRole="tblCoin" ToRole="tblCoinType" />
+        </EntityType>
+        <EntityType Name="tblCoinComposition">
+          <Key>
+            <PropertyRef Name="Composition_ID" />
+          </Key>
+          <Property Name="Composition_ID" Type="Int32" Nullable="false" />
+          <Property Name="Composition_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCoins" Relationship="Self.FK_tblCoin_tblCoinComposition" FromRole="tblCoinComposition" ToRole="tblCoin" />
+        </EntityType>
+        <EntityType Name="tblCoinImage">
+          <Key>
+            <PropertyRef Name="Image_ID" />
+          </Key>
+          <Property Name="Image_ID" Type="Int32" Nullable="false" />
+          <Property Name="Image_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCoins" Relationship="Self.FK_tblCoin_tblCoinImage" FromRole="tblCoinImage" ToRole="tblCoin" />
+        </EntityType>
+        <EntityType Name="tblCoinType">
+          <Key>
+            <PropertyRef Name="Type_ID" />
+          </Key>
+          <Property Name="Type_ID" Type="Int32" Nullable="false" />
+          <Property Name="Type_Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblCoins" Relationship="Self.FK_tblCoin_tblCoinType" FromRole="tblCoinType" ToRole="tblCoin" />
+        </EntityType>
+        <Association Name="FK_tblCoin_tblCoinComposition">
+          <End Role="tblCoinComposition" Type="Self.tblCoinComposition" Multiplicity="1" />
+          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCoinComposition">
+              <PropertyRef Name="Composition_ID" />
+            </Principal>
+            <Dependent Role="tblCoin">
+              <PropertyRef Name="Composition_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCoin_tblCoinImage">
+          <End Role="tblCoinImage" Type="Self.tblCoinImage" Multiplicity="1" />
+          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCoinImage">
+              <PropertyRef Name="Image_ID" />
+            </Principal>
+            <Dependent Role="tblCoin">
+              <PropertyRef Name="Image_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblCoin_tblCoinType">
+          <End Role="tblCoinType" Type="Self.tblCoinType" Multiplicity="1" />
+          <End Role="tblCoin" Type="Self.tblCoin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblCoinType">
+              <PropertyRef Name="Type_ID" />
+            </Principal>
+            <Dependent Role="tblCoin">
+              <PropertyRef Name="Type_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SilverTrackerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tblCoins" EntityType="Self.tblCoin" />
+          <EntitySet Name="tblCoinCompositions" EntityType="Self.tblCoinComposition" />
+          <EntitySet Name="tblCoinImages" EntityType="Self.tblCoinImage" />
+          <EntitySet Name="tblCoinTypes" EntityType="Self.tblCoinType" />
+          <AssociationSet Name="FK_tblCoin_tblCoinComposition" Association="Self.FK_tblCoin_tblCoinComposition">
+            <End Role="tblCoinComposition" EntitySet="tblCoinCompositions" />
+            <End Role="tblCoin" EntitySet="tblCoins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCoin_tblCoinImage" Association="Self.FK_tblCoin_tblCoinImage">
+            <End Role="tblCoinImage" EntitySet="tblCoinImages" />
+            <End Role="tblCoin" EntitySet="tblCoins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblCoin_tblCoinType" Association="Self.FK_tblCoin_tblCoinType">
+            <End Role="tblCoinType" EntitySet="tblCoinTypes" />
+            <End Role="tblCoin" EntitySet="tblCoins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SilverTrackerModelStoreContainer" CdmEntityContainer="SilverTrackerEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SilverTrackerModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCoins">
+            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoin">
+              <MappingFragment StoreEntitySet="tblCoin">
+                <ScalarProperty Name="Coin_ID" ColumnName="Coin_ID" />
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+                <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+                <ScalarProperty Name="Composition_ID" ColumnName="Composition_ID" />
+                <ScalarProperty Name="Coin_Name" ColumnName="Coin_Name" />
+                <ScalarProperty Name="Coin_Description" ColumnName="Coin_Description" />
+                <ScalarProperty Name="Purchase_Date" ColumnName="Purchase_Date" />
+                <ScalarProperty Name="Purchase_Amount" ColumnName="Purchase_Amount" />
+                <ScalarProperty Name="Face_Value" ColumnName="Face_Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCoinCompositions">
+            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoinComposition">
+              <MappingFragment StoreEntitySet="tblCoinComposition">
+                <ScalarProperty Name="Composition_ID" ColumnName="Composition_ID" />
+                <ScalarProperty Name="Composition_Description" ColumnName="Composition_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCoinImages">
+            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoinImage">
+              <MappingFragment StoreEntitySet="tblCoinImage">
+                <ScalarProperty Name="Image_ID" ColumnName="Image_ID" />
+                <ScalarProperty Name="Image_Path" ColumnName="Image_Path" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCoinTypes">
+            <EntityTypeMapping TypeName="SilverTrackerModel.tblCoinType">
+              <MappingFragment StoreEntitySet="tblCoinType">
+                <ScalarProperty Name="Type_ID" ColumnName="Type_ID" />
+                <ScalarProperty Name="Type_Description" ColumnName="Type_Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
