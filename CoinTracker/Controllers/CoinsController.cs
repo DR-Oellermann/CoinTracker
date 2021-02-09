@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -49,10 +50,26 @@ namespace CoinTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Coin_ID,Type_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value")] tblCoin tblCoin, HttpPostedFileBase image, DateTime date)
+        public ActionResult Create([Bind(Include = "Coin_ID,Type_ID,Composition_ID,Coin_Name,Coin_Description, Purchase_Date, Purchase_Amount,Face_Value, Image_Path")] tblCoin tblCoin, HttpPostedFileBase image)
         {
-            //nned to add coin image path save
-            // need to add coin rename
+            //add save image
+            //add image rename
+
+            if (image != null)
+            {
+                try
+                {
+                    string imgName = Convert.ToString(tblCoin.Coin_ID) + "_" + Convert.ToString(tblCoin.Purchase_Date) + "_" + System.IO.Path.GetFileName(image.FileName);
+                    image.SaveAs(Server.MapPath("~/images/" + imgName));
+                    tblCoin.Image_Path = imgName;
+                }
+                catch (Exception err)
+                {
+
+                    Debug.WriteLine("Error Happened saving image:" + err);
+                }
+
+            }
 
             if (ModelState.IsValid)
             {
@@ -88,7 +105,7 @@ namespace CoinTracker.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Coin_ID,Type_ID,Image_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value")] tblCoin tblCoin)
+        public ActionResult Edit([Bind(Include = "Coin_ID,Type_ID,Composition_ID,Coin_Name,Coin_Description,Purchase_Date,Purchase_Amount,Face_Value,Image_Path")] tblCoin tblCoin)
         {
             if (ModelState.IsValid)
             {

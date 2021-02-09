@@ -27,7 +27,7 @@
           <Property Name="Purchase_Date" Type="date" Nullable="false" />
           <Property Name="Purchase_Amount" Type="float" Nullable="false" />
           <Property Name="Face_Value" Type="float" />
-          <Property Name="Image_Path" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Image_Path" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="tblCoinComposition">
           <Key>
@@ -124,7 +124,7 @@
             <End Role="tblCoinType" EntitySet="tblCoinTypes" />
             <End Role="tblCoin" EntitySet="tblCoins" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="tblCoin">
           <Key>
             <PropertyRef Name="Coin_ID" />
@@ -137,7 +137,7 @@
           <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Purchase_Amount" Type="Double" Nullable="false" />
           <Property Name="Face_Value" Type="Double" />
-          <Property Name="Image_Path" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="tblCoinComposition" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinComposition" FromRole="tblCoin" ToRole="tblCoinComposition" />
           <NavigationProperty Name="tblCoinType" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinType" FromRole="tblCoin" ToRole="tblCoinType" />
         </EntityType>
@@ -165,7 +165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

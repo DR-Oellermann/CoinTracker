@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="SilverTrackerModel.tblCoin" Width="1.5" PointX="3" PointY="3.875" />
         <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinComposition" />
         <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinType" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>
