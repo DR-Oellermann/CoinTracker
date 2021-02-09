@@ -59,8 +59,10 @@ namespace CoinTracker.Controllers
             {
                 try
                 {
-                    string imgName = Convert.ToString(tblCoin.Coin_ID) + "_" + Convert.ToString(tblCoin.Purchase_Date) + "_" + System.IO.Path.GetFileName(image.FileName);
+                    //Convert.ToString(tblCoin.Coin_ID) + "_" + Convert.ToString(tblCoin.Purchase_Date) + "_" +
+                    string imgName = Convert.ToString(tblCoin.Coin_ID) + "_" + Convert.ToString(tblCoin.Coin_Name) + "_" + System.IO.Path.GetFileName(image.FileName);
                     image.SaveAs(Server.MapPath("~/images/" + imgName));
+                    Debug.WriteLine("Image PATH:" + imgName);
                     tblCoin.Image_Path = imgName;
                 }
                 catch (Exception err)
