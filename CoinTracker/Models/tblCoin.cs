@@ -11,7 +11,8 @@ namespace CoinTracker.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblCoin
     {
         public int Coin_ID { get; set; }
@@ -19,6 +20,8 @@ namespace CoinTracker.Models
         public int Composition_ID { get; set; }
         public string Coin_Name { get; set; }
         public string Coin_Description { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime Purchase_Date { get; set; }
         public double Purchase_Amount { get; set; }
         public Nullable<double> Face_Value { get; set; }

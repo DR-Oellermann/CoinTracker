@@ -79,3 +79,35 @@
 }
 
 </table>
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+        <div class="col-sm-4">
+            <div class="card" style="width:400px">
+                <img class="card-img-top" id="img_Card" src="~/images/@item.Image_Path" alt="Coin Image">
+                <div class="card-body">
+                    <h4 class="card-title">@item.Coin_Name</h4>
+                    <p class="card-text">Purchased for: R @item.Purchase_Amount</p>
+                    <a href="#" class="btn btn-primary">Coin Details</a>
+                </div>
+            </div>
+
+        </div>
+    }
+</div>
+
+<style>
+    #img_Card{
+        max-height: 100px;
+        max-width: 100px;
+    }
+    
+    .card{
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 5px;
+        border-color: black;
+    }
+</style>
+
