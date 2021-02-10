@@ -22,3 +22,15 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#img_Card {
+    max-height: 100px;
+    max-width: 100px;
+}
+
+.Coin_Card {
+    border-style: solid;
+    border-color: #A8A8A8;
+    border-radius: 5px;
+    padding: 1rem;
+}
