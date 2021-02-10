@@ -35,41 +35,47 @@
         <th>
             @Html.DisplayNameFor(model => model.tblCoinType.Type_Description)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Coin_Weight)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Coin_Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Coin_Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Purchase_Date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Purchase_Amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Face_Value)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image_Path)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblCoinComposition.Composition_Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tblCoinType.Type_Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Coin_ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Coin_ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Coin_ID })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Coin_Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Coin_Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Purchase_Date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Purchase_Amount)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Face_Value)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Image_Path)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblCoinComposition.Composition_Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.tblCoinType.Type_Description)
+    </td>
+    <td>
+        @Html.DisplayFor(model => item.Coin_Weight) 
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.Coin_ID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.Coin_ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Coin_ID })
+    </td>
+</tr>
 }
 
 </table>
