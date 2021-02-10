@@ -20,7 +20,7 @@
                 <div class="card-body">
                     <h4 class="card-title">@item.Coin_Name</h4>
                     <p class="card-text">Purchased for: <u>R @item.Purchase_Amount</u> on <u>@item.Purchase_Date.ToLongDateString()</u></p>
-                    <a href="#" class="btn btn-primary">Coin Details</a>
+                    <button class="btn btn-success" name="ViewCoinBtn" formmethod="post" onclick="location.href='@Url.Action("Details", "Coins", new { id = item.Coin_ID})'">Coin Details<span class="material-icons">visibility</span></button>
                 </div>
             </div>
 
