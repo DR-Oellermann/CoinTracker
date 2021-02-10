@@ -28,6 +28,7 @@
           <Property Name="Purchase_Amount" Type="float" Nullable="false" />
           <Property Name="Face_Value" Type="float" />
           <Property Name="Image_Path" Type="nvarchar(max)" />
+          <Property Name="Coin_Weight" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="tblCoinComposition">
           <Key>
@@ -138,6 +139,7 @@
           <Property Name="Purchase_Amount" Type="Double" Nullable="false" />
           <Property Name="Face_Value" Type="Double" />
           <Property Name="Image_Path" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Coin_Weight" Type="Double" Nullable="false" />
           <NavigationProperty Name="tblCoinComposition" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinComposition" FromRole="tblCoin" ToRole="tblCoinComposition" />
           <NavigationProperty Name="tblCoinType" Relationship="SilverTrackerModel.FK_tblCoin_tblCoinType" FromRole="tblCoin" ToRole="tblCoinType" />
         </EntityType>
@@ -201,6 +203,7 @@
           <EntitySetMapping Name="tblCoins">
             <EntityTypeMapping TypeName="SilverTrackerModel.tblCoin">
               <MappingFragment StoreEntitySet="tblCoin">
+                <ScalarProperty Name="Coin_Weight" ColumnName="Coin_Weight" />
                 <ScalarProperty Name="Image_Path" ColumnName="Image_Path" />
                 <ScalarProperty Name="Face_Value" ColumnName="Face_Value" />
                 <ScalarProperty Name="Purchase_Amount" ColumnName="Purchase_Amount" />

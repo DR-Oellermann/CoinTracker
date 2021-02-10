@@ -59,10 +59,11 @@ namespace CoinTracker.Controllers
             {
                 try
                 {
-                    //Convert.ToString(tblCoin.Coin_ID) + "_" + Convert.ToString(tblCoin.Purchase_Date) + "_" +
+                    //rename image to ID of coin and coin name
                     string imgName = Convert.ToString(tblCoin.Coin_ID) + "_" + Convert.ToString(tblCoin.Coin_Name) + "_" + System.IO.Path.GetFileName(image.FileName);
+                    //save in images folder
                     image.SaveAs(Server.MapPath("~/images/" + imgName));
-                    Debug.WriteLine("Image PATH:" + imgName);
+                    //set db image path
                     tblCoin.Image_Path = imgName;
                 }
                 catch (Exception err)

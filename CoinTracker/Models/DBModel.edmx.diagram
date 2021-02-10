@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="SilverTrackerModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SilverTrackerModel.tblCoinComposition" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SilverTrackerModel.tblCoinType" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SilverTrackerModel.tblCoin" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="SilverTrackerModel.tblCoin" Width="1.5" PointX="3" PointY="3.75" />
         <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinComposition" />
         <AssociationConnector Association="SilverTrackerModel.FK_tblCoin_tblCoinType" />
         </Diagram>
