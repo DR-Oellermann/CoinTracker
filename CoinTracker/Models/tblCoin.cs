@@ -11,22 +11,48 @@ namespace CoinTracker.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class tblCoin
     {
         public int Coin_ID { get; set; }
+
+        [DisplayName("Coin Type:")]
         public int Type_ID { get; set; }
+
+        [DisplayName("Coin Composition:")]
         public int Composition_ID { get; set; }
+
+        [DisplayName("Coin Name:")]
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage = "Coin Name Required!")]
         public string Coin_Name { get; set; }
+
+        [DisplayName("Coin Description:")]
         public string Coin_Description { get; set; }
+
+        [DisplayName("Purchase Date:")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Purchase Date is required!")]
         public System.DateTime Purchase_Date { get; set; }
+
+        [DisplayName("Purchase Amount:")]
+        [DataType(DataType.Currency)]
+        [Required(ErrorMessage = "Purchase Amount is required!")]
         public double Purchase_Amount { get; set; }
+
+        [DisplayName("Face Value:")]
         public Nullable<double> Face_Value { get; set; }
+
+        [DisplayName("Upload Image:")]
         public string Image_Path { get; set; }
+
+        [DisplayName("Coin Weight:")]
+        [Required(ErrorMessage = "Coin weight is required!")]
         public double Coin_Weight { get; set; }
+
     
         public virtual tblCoinComposition tblCoinComposition { get; set; }
         public virtual tblCoinType tblCoinType { get; set; }

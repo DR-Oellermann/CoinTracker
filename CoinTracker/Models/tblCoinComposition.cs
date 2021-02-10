@@ -11,7 +11,8 @@ namespace CoinTracker.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class tblCoinComposition
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,8 +20,8 @@ namespace CoinTracker.Models
         {
             this.tblCoins = new HashSet<tblCoin>();
         }
-    
         public int Composition_ID { get; set; }
+        
         public string Composition_Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
